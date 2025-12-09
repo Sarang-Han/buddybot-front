@@ -7,7 +7,7 @@ interface ChatHeaderProps {
 
 export default function ChatHeader({ onOpenFAQ, onOpenDrawer }: ChatHeaderProps) {
   return (
-    <header className="bg-ewha-green text-white py-3 px-4 relative overflow-hidden">
+    <header className="bg-gradient-to-br from-ewha-green via-ewha-green to-ewha-green-sub text-white py-3 px-4 relative overflow-hidden shadow-sm">
       {/* 배경 로고 워터마크 */}
       <div className="absolute -right-6 -bottom-6 opacity-10 pointer-events-none">
         <Image 
@@ -24,7 +24,7 @@ export default function ChatHeader({ onOpenFAQ, onOpenDrawer }: ChatHeaderProps)
         {/* 왼쪽: 메뉴 버튼 */}
         <button
           onClick={onOpenDrawer}
-          className="p-1.5 hover:bg-white/10 rounded-lg transition-colors"
+          className="p-1.5 hover:bg-white/20 hover:scale-110 rounded-lg transition-all duration-200"
           aria-label="메뉴"
         >
           <svg
@@ -51,7 +51,7 @@ export default function ChatHeader({ onOpenFAQ, onOpenDrawer }: ChatHeaderProps)
         {/* 오른쪽: FAQ 버튼 */}
         <button
           onClick={onOpenFAQ}
-          className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+          className="p-2 hover:bg-white/20 hover:scale-110 rounded-lg transition-all duration-200"
           aria-label="자주 묻는 질문"
         >
           <svg

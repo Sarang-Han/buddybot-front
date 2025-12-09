@@ -57,10 +57,10 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="bg-white border border-gray-200 rounded-lg p-4 mb-3">
+    <section className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 rounded-xl p-4 mb-3">
       {/* Buddy 소개 */}
       <div className="flex items-center space-x-3 mb-3 pb-3 border-b border-gray-100">
-        <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+        <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0 ring-2 ring-ewha-green/10">
           <Image
             src="/bear.jpeg"
             alt="버디 곰"
@@ -103,7 +103,7 @@ export default function HeroSection() {
           
           <div className="space-y-2">
             {events.map((event, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-2.5">
+              <div key={index} className="rounded-lg p-2.5 border border-gray-100" style={{ backgroundColor: '#f8f7f7ff' }}>
                 <div className="text-xs font-medium text-gray-700 mb-0.5">
                   📅 {new Date(event.startDate).toLocaleDateString('ko-KR', { 
                     month: 'long', 

@@ -61,7 +61,7 @@ export default function StudentInfoCard({ onInfoComplete, onInfoReset, studentIn
   // 정보 입력 완료 후 축소된 뷰
   if (studentInfo) {
     return (
-      <div className="bg-ewha-green text-white rounded-lg p-3 mb-3 relative overflow-hidden">
+      <div className="bg-gradient-to-br from-ewha-green via-ewha-green to-ewha-green-sub text-white rounded-xl p-3 mb-3 relative overflow-hidden">
         {/* 배경 로고 워터마크 */}
         <div className="absolute -right-3 -bottom-6 opacity-10 pointer-events-none">
           <Image 
@@ -83,7 +83,7 @@ export default function StudentInfoCard({ onInfoComplete, onInfoReset, studentIn
           </div>
           <button
             onClick={handleEdit}
-            className="text-xs bg-white/20 hover:bg-white/30 px-2.5 py-1 rounded-md transition-colors flex items-center space-x-1"
+            className="text-xs bg-white/20 hover:bg-white/30 hover:scale-105 px-2.5 py-1 rounded-md transition-all duration-200 flex items-center space-x-1"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -108,10 +108,13 @@ export default function StudentInfoCard({ onInfoComplete, onInfoReset, studentIn
 
   // 정보 입력 전 컴팩트 뷰
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 mb-3">
+    <div className="bg-gradient-to-br from-white to-gray-50/50 border border-gray-200 rounded-xl p-4 mb-3">
       <div className="flex items-center mb-3">
         <div>
-          <h2 className="text-sm font-semibold text-gray-800">미니 학생증</h2>
+          <h2 className="text-sm font-semibold text-gray-800 flex items-center">
+            <span className="mr-1.5">🎓</span>
+            미니 학생증
+          </h2>
           <p className="text-xs text-gray-500">정보를 입력하면 채팅을 입력할 수 있어요</p>
         </div>
       </div>
@@ -121,7 +124,7 @@ export default function StudentInfoCard({ onInfoComplete, onInfoReset, studentIn
         <select
           value={semester}
           onChange={(e) => setSemester(e.target.value)}
-          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-ewha-green focus:border-transparent"
+          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-ewha-green/50 focus:border-ewha-green shadow-sm transition-all duration-200"
         >
           <option value="">이수 완료한 학기를 선택하세요</option>
           <option value="0">0학기 (신입생)</option>
@@ -142,19 +145,19 @@ export default function StudentInfoCard({ onInfoComplete, onInfoReset, studentIn
           value={major}
           onChange={(e) => setMajor(e.target.value)}
           placeholder="전공 (예: 컴퓨터공학과)"
-          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-ewha-green focus:border-transparent"
+          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-ewha-green/50 focus:border-ewha-green transition-all duration-200"
         />
 
         <button
           onClick={handleSubmit}
           disabled={!isComplete}
-          className={`w-full py-2 text-sm rounded-lg font-medium transition-colors ${
+          className={`w-full py-2.5 text-sm rounded-lg font-medium transition-all duration-200 ${
             isComplete
-              ? 'bg-ewha-green text-white hover:bg-ewha-green-sub'
+              ? 'bg-gradient-to-r from-ewha-green to-ewha-green-sub text-white hover:scale-[1.02]'
               : 'bg-gray-300 text-gray-500 cursor-not-allowed'
           }`}
         >
-          {isComplete ? '저장하기' : '모두 입력해주세요'}
+          {isComplete ? '✨ 저장하기' : '모두 입력해주세요'}
         </button>
       </div>
     </div>

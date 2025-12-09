@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-bg-cream to-white">
       {/* 모바일 화면 비율로 프레임 설정 (375x812 - iPhone X 기준) */}
-      <div className="w-full h-screen max-w-md mx-auto bg-bg-cream shadow-2xl flex flex-col overflow-hidden">
+      <div className="w-full h-screen max-w-md mx-auto bg-gradient-to-b from-white to-gray-50/50 shadow-2xl shadow-emerald-900/20 flex flex-col overflow-hidden backdrop-blur-sm">
         <ChatContainer 
           ref={chatContainerRef}
           onOpenFAQ={() => setShowFAQ(true)}

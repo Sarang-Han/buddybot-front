@@ -63,10 +63,10 @@ export default function GradeGuideSection({ onGuideClick, studentInfo }: GradeGu
   const isLocked = !studentInfo;
 
   return (
-    <div className={`rounded-lg p-4 transition-all ${
+    <div className={`rounded-xl p-4 transition-all duration-300 ${
       isLocked 
-        ? 'bg-gray-50 border border-dashed border-gray-300' 
-        : 'bg-white border border-gray-200'
+        ? 'bg-gradient-to-br from-gray-50 to-gray-100/50 border border-dashed border-gray-300' 
+        : 'bg-gradient-to-br from-white to-gray-50/50 border border-gray-200'
     }`}>
       <div className="flex items-center justify-between mb-3">
         <h3 className={`text-sm font-semibold flex items-center ${
@@ -106,7 +106,7 @@ export default function GradeGuideSection({ onGuideClick, studentInfo }: GradeGu
                 <button
                   key={index}
                   onClick={() => onGuideClick(item)}
-                  className="w-full text-left text-xs text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md transition-colors flex items-center cursor-pointer"
+                  className="w-full text-left text-xs text-gray-700 hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:scale-[1.02] px-3 py-2 rounded-md transition-all duration-200 flex items-center cursor-pointer border border-transparent hover:border-gray-200"
                 >
                   <span className="mr-2 text-sm">✔️</span>
                   <span>{item}</span>

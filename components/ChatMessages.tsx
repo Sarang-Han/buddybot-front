@@ -24,13 +24,13 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
       {messages.map((message) => (
         <div
           key={message.id}
-          className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+          className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
         >
           <div
-            className={`max-w-[75%] rounded-2xl px-4 py-2.5 ${
+            className={`max-w-[75%] rounded-2xl px-4 py-2.5 transition-all duration-200 ${
               message.sender === 'user'
-                ? 'bg-ewha-green text-white rounded-br-sm'
-                : 'bg-white text-gray-800 border border-gray-200 rounded-bl-sm'
+                ? 'bg-gradient-to-br from-ewha-green to-ewha-green-sub text-white rounded-br-sm'
+                : 'bg-white text-gray-800 border border-gray-200 rounded-bl-sm hover:border-ewha-green/30'
             }`}
           >
             <p className="text-sm whitespace-pre-wrap break-words">{message.text}</p>
@@ -49,12 +49,12 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
       ))}
       
       {isLoading && (
-        <div className="flex justify-start">
+        <div className="flex justify-start animate-fade-in">
           <div className="bg-white rounded-2xl rounded-bl-sm px-4 py-3 border border-gray-200">
             <div className="flex space-x-2">
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              <div className="w-2 h-2 bg-gradient-to-r from-ewha-green to-accent-mint rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-gradient-to-r from-accent-mint to-accent-blue rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+              <div className="w-2 h-2 bg-gradient-to-r from-accent-blue to-ewha-green rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
             </div>
           </div>
         </div>

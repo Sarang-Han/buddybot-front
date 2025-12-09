@@ -31,7 +31,7 @@ export default function ChatInput({ onSendMessage, disabled, studentInfo }: Chat
     : "먼저 위에서 학생 정보를 입력해주세요";
 
   return (
-    <div className="border-t border-gray-200 bg-white px-3 py-2">
+    <div className="border-t border-gray-200 bg-gradient-to-r from-white to-gray-50/50 px-3 py-3 shadow-inner">
       <div className="relative flex items-center">
         <textarea
           value={input}
@@ -40,7 +40,7 @@ export default function ChatInput({ onSendMessage, disabled, studentInfo }: Chat
           placeholder={placeholder}
           disabled={disabled}
           rows={1}
-          className="flex-1 resize-none rounded-full border border-gray-300 pl-4 pr-12 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-ewha-green focus:border-ewha-green disabled:bg-gray-50 disabled:cursor-not-allowed disabled:text-gray-400"
+          className="flex-1 resize-none rounded-full border border-gray-300 pl-4 pr-12 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ewha-green/50 focus:border-ewha-green disabled:bg-gray-50 disabled:cursor-not-allowed disabled:text-gray-400 transition-all duration-200"
           style={{
             maxHeight: '80px',
             minHeight: '40px',
@@ -49,7 +49,7 @@ export default function ChatInput({ onSendMessage, disabled, studentInfo }: Chat
         <button
           onClick={handleSend}
           disabled={disabled || !input.trim()}
-          className="absolute right-1.5 bg-ewha-green text-white rounded-full p-2 hover:opacity-90 disabled:bg-gray-300 disabled:cursor-not-allowed transition-opacity"
+          className="absolute right-1.5 bg-gradient-to-br from-ewha-green to-ewha-green-sub text-white rounded-full p-2 hover:scale-110 hover:shadow-lg disabled:bg-gray-300 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-200"
           aria-label="메시지 보내기"
         >
           <svg
