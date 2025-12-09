@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 interface GradeGuideSectionProps {
   onGuideClick: (guide: string) => void;
@@ -56,14 +56,8 @@ const gradeGuides: Record<string, { title: string; items: string[] }> = {
 };
 
 export default function GradeGuideSection({ onGuideClick, studentInfo }: GradeGuideSectionProps) {
-  const [selectedGrade, setSelectedGrade] = useState('1');
-
-  // studentInfo가 있으면 해당 학년으로 자동 설정
-  useEffect(() => {
-    if (studentInfo?.grade) {
-      setSelectedGrade(studentInfo.grade);
-    }
-  }, [studentInfo]);
+  // 학생 정보의 학년을 초기값으로 사용하되, 이후에는 자유롭게 변경 가능
+  const [selectedGrade, setSelectedGrade] = useState(studentInfo?.grade || '1');
 
   const currentGuide = gradeGuides[selectedGrade];
   const isLocked = !studentInfo;

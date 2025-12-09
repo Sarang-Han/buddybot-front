@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
@@ -176,6 +176,7 @@ const ChatContainer = forwardRef<
         onSendMessage={sendMessage} 
         disabled={isLoading || !studentInfo}
         onOpenFAQ={onOpenFAQ}
+        studentInfo={studentInfo}
       />
     </div>
   );

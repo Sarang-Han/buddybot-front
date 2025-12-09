@@ -6,9 +6,10 @@ interface ChatInputProps {
   onSendMessage: (message: string) => void;
   disabled?: boolean;
   onOpenFAQ: () => void;
+  studentInfo: { grade: string; major: string; semester: string } | null;
 }
 
-export default function ChatInput({ onSendMessage, disabled, onOpenFAQ }: ChatInputProps) {
+export default function ChatInput({ onSendMessage, disabled, studentInfo }: ChatInputProps) {
   const [input, setInput] = useState('');
 
   const handleSend = () => {
@@ -25,35 +26,39 @@ export default function ChatInput({ onSendMessage, disabled, onOpenFAQ }: ChatIn
     }
   };
 
+  const placeholder = studentInfo 
+    ? "메시지를 입력하세요..."
+    : "먼저 위에서 학생 정보를 입력해주세요";
+
   return (
-    <div className="border-t bg-white p-4">
-      <div className="flex items-end space-x-2">
+    <div className="border-t border-gray-300 bg-white px-3 py-2">
+      <div className="relative flex items-center">
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder="메시지를 입력하세요..."
+          placeholder={placeholder}
           disabled={disabled}
           rows={1}
-          className="flex-1 resize-none rounded-full border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+          className="flex-1 resize-none rounded-full border border-gray-200 pl-4 pr-12 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--ewha-green)] focus:border-transparent disabled:bg-gray-50 disabled:cursor-not-allowed disabled:text-gray-400"
           style={{
-            maxHeight: '100px',
-            minHeight: '48px',
+            maxHeight: '80px',
+            minHeight: '40px',
           }}
         />
         <button
           onClick={handleSend}
           disabled={disabled || !input.trim()}
-          className="bg-blue-600 text-white rounded-full p-3 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex-shrink-0"
+          className="absolute right-1.5 bg-[var(--ewha-green)] text-white rounded-full p-2 hover:bg-[var(--ewha-green-sub)] disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
           aria-label="메시지 보내기"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={2}
+            strokeWidth={2.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-4 h-4"
           >
             <path
               strokeLinecap="round"
