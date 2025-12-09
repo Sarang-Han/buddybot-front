@@ -63,14 +63,14 @@ export default function GradeGuideSection({ onGuideClick, studentInfo }: GradeGu
   const isLocked = !studentInfo;
 
   return (
-    <div className={`rounded-xl p-4 shadow-md mb-4 transition-all ${
+    <div className={`rounded-lg p-4 transition-all ${
       isLocked 
-        ? 'bg-gray-100 border-2 border-dashed border-gray-300' 
-        : 'bg-gradient-to-br from-accent-mint/10 to-accent-blue/10'
+        ? 'bg-gray-50 border border-dashed border-gray-300' 
+        : 'bg-white border border-gray-200'
     }`}>
       <div className="flex items-center justify-between mb-3">
-        <h3 className={`text-base font-bold flex items-center ${
-          isLocked ? 'text-gray-400' : 'text-ewha-green'
+        <h3 className={`text-sm font-semibold flex items-center ${
+          isLocked ? 'text-gray-400' : 'text-gray-800'
         }`}>
           학년별 맞춤 정보
         </h3>
@@ -78,7 +78,7 @@ export default function GradeGuideSection({ onGuideClick, studentInfo }: GradeGu
           <select
             value={selectedGrade}
             onChange={(e) => setSelectedGrade(e.target.value)}
-            className="px-2 py-1 text-xs border-2 border-ewha-green rounded-lg font-medium text-ewha-green bg-white"
+            className="px-2 py-1 text-xs border border-gray-300 rounded-md font-medium text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-ewha-green"
           >
             <option value="1">1학년</option>
             <option value="2">2학년</option>
@@ -99,16 +99,16 @@ export default function GradeGuideSection({ onGuideClick, studentInfo }: GradeGu
         </div>
       ) : (
         <>
-          <div className="bg-white rounded-lg p-3 mb-2">
-            <h4 className="text-sm font-bold text-gray-800 mb-2">{currentGuide.title}</h4>
+          <div>
+            <h4 className="text-sm font-medium text-gray-700 mb-2">{currentGuide.title}</h4>
             <div className="space-y-1">
               {currentGuide.items.map((item, index) => (
                 <button
                   key={index}
                   onClick={() => onGuideClick(item)}
-                  className="w-full text-left text-xs text-gray-700 hover:text-ewha-green hover:bg-bg-cream active:bg-ewha-green active:text-white px-2 py-1.5 rounded-lg transition-all active:scale-95 flex items-center cursor-pointer"
+                  className="w-full text-left text-xs text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md transition-colors flex items-center cursor-pointer"
                 >
-                  <span className="mr-2 text-sm">✅</span>
+                  <span className="mr-2 text-sm">✔️</span>
                   <span>{item}</span>
                 </button>
               ))}

@@ -7,21 +7,33 @@ interface ChatHeaderProps {
 
 export default function ChatHeader({ onOpenFAQ, onOpenDrawer }: ChatHeaderProps) {
   return (
-    <header className="bg-gradient-to-r from-ewha-green to-ewha-green-sub text-white p-4 shadow-md">
-      <div className="flex items-center justify-between relative">
+    <header className="bg-ewha-green text-white py-3 px-4 relative overflow-hidden">
+      {/* 배경 로고 워터마크 */}
+      <div className="absolute -right-6 -bottom-6 opacity-10 pointer-events-none">
+        <Image 
+          src="/symbol.PNG" 
+          alt="이화여대 심볼" 
+          width={160} 
+          height={160}
+          className="object-contain"
+          priority
+        />
+      </div>
+
+      <div className="flex items-center justify-between relative z-10">
         {/* 왼쪽: 메뉴 버튼 */}
         <button
           onClick={onOpenDrawer}
-          className="p-2 hover:bg-white/10 rounded-lg transition-colors z-10"
+          className="p-1.5 hover:bg-white/10 rounded-lg transition-colors"
           aria-label="메뉴"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={2}
+            strokeWidth={1.5}
             stroke="currentColor"
-            className="w-5 h-5"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -31,34 +43,24 @@ export default function ChatHeader({ onOpenFAQ, onOpenDrawer }: ChatHeaderProps)
           </svg>
         </button>
         
-        {/* 중앙: 로고와 제목 */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center w-full pointer-events-none">
-          <div className="flex items-center gap-2">
-            <Image 
-              src="/symbol.PNG" 
-              alt="이화여대 심볼" 
-              width={24} 
-              height={24}
-              className="object-contain"
-              priority
-            />
-            <h1 className="text-lg font-semibold">이화여자대학교 챗봇</h1>
-          </div>
+        {/* 중앙: 제목 */}
+        <div className="absolute left-1/2 transform -translate-x-1/2">
+          <h1 className="text-base font-semibold">이화여자대학교 챗봇</h1>
         </div>
         
         {/* 오른쪽: FAQ 버튼 */}
         <button
           onClick={onOpenFAQ}
-          className="p-2 hover:bg-white/10 rounded-lg transition-colors z-10"
+          className="p-2 hover:bg-white/10 rounded-lg transition-colors"
           aria-label="자주 묻는 질문"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={2}
+            strokeWidth={1.5}
             stroke="currentColor"
-            className="w-5 h-5"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"

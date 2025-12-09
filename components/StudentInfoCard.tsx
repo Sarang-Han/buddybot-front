@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface StudentInfo {
   grade: string;
@@ -60,8 +61,19 @@ export default function StudentInfoCard({ onInfoComplete, onInfoReset, studentIn
   // 정보 입력 완료 후 축소된 뷰
   if (studentInfo) {
     return (
-      <div className="bg-gradient-to-r from-ewha-green to-ewha-green-sub text-white rounded-xl p-3 shadow-md mb-4">
-        <div className="flex items-center justify-between">
+      <div className="bg-ewha-green text-white rounded-lg p-3 mb-3 relative overflow-hidden">
+        {/* 배경 로고 워터마크 */}
+        <div className="absolute -right-3 -bottom-6 opacity-10 pointer-events-none">
+          <Image 
+            src="/symbol.PNG" 
+            alt="이화여대 심볼" 
+            width={130} 
+            height={130}
+            className="object-contain"
+          />
+        </div>
+
+        <div className="flex items-center justify-between relative z-10">
           <div className="flex items-center space-x-2 flex-1">
             <div className="text-sm">
               <span className="font-bold">{getSemesterLabel(studentInfo.semester)}</span>
@@ -71,7 +83,7 @@ export default function StudentInfoCard({ onInfoComplete, onInfoReset, studentIn
           </div>
           <button
             onClick={handleEdit}
-            className="text-xs bg-white/20 hover:bg-white/30 px-2 py-1 rounded-lg transition-colors flex items-center space-x-1"
+            className="text-xs bg-white/20 hover:bg-white/30 px-2.5 py-1 rounded-md transition-colors flex items-center space-x-1"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -96,10 +108,10 @@ export default function StudentInfoCard({ onInfoComplete, onInfoReset, studentIn
 
   // 정보 입력 전 컴팩트 뷰
   return (
-    <div className="bg-white border-2 border-ewha-green rounded-xl p-4 shadow-md mb-4">
+    <div className="bg-white border border-gray-200 rounded-lg p-4 mb-3">
       <div className="flex items-center mb-3">
         <div>
-          <h2 className="text-sm font-bold text-ewha-green">미니 학생증</h2>
+          <h2 className="text-sm font-semibold text-gray-800">미니 학생증</h2>
           <p className="text-xs text-gray-500">정보를 입력하면 채팅을 입력할 수 있어요</p>
         </div>
       </div>
