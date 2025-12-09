@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface ChatHeaderProps {
   onOpenFAQ: () => void;
   onOpenDrawer: () => void;
@@ -29,8 +31,20 @@ export default function ChatHeader({ onOpenFAQ, onOpenDrawer }: ChatHeaderProps)
           </svg>
         </button>
         
-        {/* 중앙: 제목 */}
-        <h1 className="absolute left-1/2 transform -translate-x-1/2 text-lg font-semibold">이화여자대학교 챗봇</h1>
+        {/* 중앙: 로고와 제목 */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center w-full pointer-events-none">
+          <div className="flex items-center gap-2">
+            <Image 
+              src="/symbol.PNG" 
+              alt="이화여대 심볼" 
+              width={24} 
+              height={24}
+              className="object-contain"
+              priority
+            />
+            <h1 className="text-lg font-semibold">이화여자대학교 챗봇</h1>
+          </div>
+        </div>
         
         {/* 오른쪽: FAQ 버튼 */}
         <button

@@ -58,7 +58,7 @@ export default function SidebarDrawer({ isOpen, onClose, onClearChat, onOpenFeed
       {/* Drawer */}
       <div
         className={`absolute top-0 left-0 h-full w-[280px] bg-white shadow-2xl transform transition-transform duration-300 z-50 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+          isOpen ? 'translate-x-0' : '-translate-x-[120%]'
         }`}
       >
         <div className="flex flex-col h-full">
