@@ -19,7 +19,14 @@ module.exports = {
         'accent-mint': '#36ae92',
         'accent-coral': '#f27367',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };

@@ -1,13 +1,5 @@
 # 신입생 도우미 RAG 챗봇 - 프론트엔드
-
 Next.js 기반 신입생을 위한 RAG 챗봇 프론트엔드입니다.
-
-## 주요 기능
-
-- 📱 모바일 최적화 UI (375px 기준)
-- 💬 실시간 채팅 인터페이스
-- 🎨 반응형 디자인 (Tailwind CSS)
-- 🔗 FastAPI 백엔드 연동 준비 완료
 
 ## 시작하기
 
@@ -89,17 +81,3 @@ buddybot-front/
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **UI**: 모바일 최적화 (max-width: 448px)
-
-## 개발 참고사항
-
-- 모바일 화면 비율로 최적화되어 있습니다 (iPhone X 기준)
-- 데스크톱에서는 중앙 정렬된 모바일 프레임으로 표시됩니다
-- 추천 질문 기능이 포함되어 있습니다
-- 로딩 상태 애니메이션이 구현되어 있습니다
-
-## 빌드
-
-```bash
-npm run build
-npm start
-```

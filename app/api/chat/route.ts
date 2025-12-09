@@ -6,7 +6,7 @@ const FASTAPI_URL = process.env.FASTAPI_URL || 'http://localhost:8000';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { message } = body;
+    const { message, studentInfo } = body;
 
     if (!message) {
       return NextResponse.json(
@@ -15,13 +15,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // 백엔드 API 스펙에 맞게 요청 본문 구성
+    const requestBody: any = {
+      session_id: `session_${Date.now()}`,
+      message: message,
+      user_grade: studentInfo?.grade ? parseInt(studentInfo.grade) : 0,
+      user_major: studentInfo?.major || '',
+    };
+
     // FastAPI 백엔드로 요청 전송
-    const response = await fetch(`${FASTAPI_URL}/chat`, {
+    const response = await fetch(`${FASTAPI_URL}/ask`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!response.ok) {
@@ -31,7 +39,8 @@ export async function POST(request: NextRequest) {
     const data = await response.json();
 
     return NextResponse.json({
-      response: data.response || data.answer || data.message,
+      response: data.answer || data.response || data.message,
+      sources: data.sources || [],
     });
   } catch (error) {
     console.error('Chat API 오류:', error);
