@@ -72,7 +72,6 @@ export default function GradeGuideSection({ onGuideClick, studentInfo }: GradeGu
         <h3 className={`text-base font-bold flex items-center ${
           isLocked ? 'text-gray-400' : 'text-ewha-green'
         }`}>
-          <span className="mr-2">👤</span>
           학년별 맞춤 정보
         </h3>
         {!isLocked && (
@@ -95,7 +94,7 @@ export default function GradeGuideSection({ onGuideClick, studentInfo }: GradeGu
           <div className="text-4xl mb-2">🔒</div>
           <p className="text-sm text-gray-500 font-medium">
             학생증을 작성하면<br />
-            맞춤 가이드를 볼 수 있어요
+            맞춤 정보를 볼 수 있어요
           </p>
         </div>
       ) : (

@@ -6,7 +6,6 @@ import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
 import HeroSection from './HeroSection';
 import StudentInfoCard from './StudentInfoCard';
-import ImportantAlertBanner from './ImportantAlertBanner';
 import GradeGuideSection from './GradeGuideSection';
 import SidebarDrawer from './SidebarDrawer';
 import FeedbackModal from './FeedbackModal';
@@ -151,7 +150,6 @@ const ChatContainer = forwardRef<
             onInfoReset={handleInfoReset}
             studentInfo={studentInfo}
           />
-          <ImportantAlertBanner />
           <GradeGuideSection 
             onGuideClick={handleGuideClick}
             studentInfo={studentInfo}
