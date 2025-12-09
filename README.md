@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 신입생 도우미 RAG 챗봇 - 프론트엔드
 
-## Getting Started
+Next.js 기반 신입생을 위한 RAG 챗봇 프론트엔드입니다.
 
-First, run the development server:
+## 주요 기능
+
+- 📱 모바일 최적화 UI (375px 기준)
+- 💬 실시간 채팅 인터페이스
+- 🎨 반응형 디자인 (Tailwind CSS)
+- 🔗 FastAPI 백엔드 연동 준비 완료
+
+## 시작하기
+
+### 1. 의존성 설치
+
+```bash
+npm install
+```
+
+### 2. 환경 변수 설정
+
+`.env.local` 파일을 확인하고 FastAPI 백엔드 URL을 설정하세요:
+
+```env
+FASTAPI_URL=http://localhost:8000
+```
+
+### 3. 개발 서버 실행
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## FastAPI 백엔드 연동
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 백엔드 실행 (Docker)
 
-## Learn More
+FastAPI 백엔드를 도커로 실행:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# 백엔드 디렉토리에서
+docker-compose up -d
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### API 엔드포인트
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+프론트엔드는 다음 엔드포인트를 호출합니다:
 
-## Deploy on Vercel
+- `POST /chat` - 사용자 메시지를 받아 AI 응답 반환
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+예상 요청 형식:
+```json
+{
+  "message": "사용자 질문"
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+예상 응답 형식:
+```json
+{
+  "response": "AI 응답"
+}
+```
+
+## 프로젝트 구조
+
+```
+buddybot-front/
+├── app/
+│   ├── api/
+│   │   └── chat/
+│   │       └── route.ts      # FastAPI 프록시 API
+│   ├── layout.tsx            # 루트 레이아웃
+│   ├── page.tsx              # 메인 페이지
+│   └── globals.css           # 전역 스타일
+├── components/
+│   ├── ChatContainer.tsx     # 채팅 컨테이너 (상태 관리)
+│   ├── ChatHeader.tsx        # 헤더 컴포넌트
+│   ├── ChatMessages.tsx      # 메시지 목록
+│   └── ChatInput.tsx         # 입력 컴포넌트
+└── .env.local               # 환경 변수
+```
+
+## 기술 스택
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI**: 모바일 최적화 (max-width: 448px)
+
+## 개발 참고사항
+
+- 모바일 화면 비율로 최적화되어 있습니다 (iPhone X 기준)
+- 데스크톱에서는 중앙 정렬된 모바일 프레임으로 표시됩니다
+- 추천 질문 기능이 포함되어 있습니다
+- 로딩 상태 애니메이션이 구현되어 있습니다
+
+## 빌드
+
+```bash
+npm run build
+npm start
+```
