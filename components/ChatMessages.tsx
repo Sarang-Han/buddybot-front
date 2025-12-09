@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Message } from './ChatContainer';
+import SourcesModal from './SourcesModal';
 
 interface ChatMessagesProps {
   messages: Message[];
@@ -12,6 +13,8 @@ interface ChatMessagesProps {
 
 export default function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [selectedSources, setSelectedSources] = useState<Message['sources']>([]);
+  const [isSourcesModalOpen, setIsSourcesModalOpen] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -20,6 +23,11 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
   useEffect(() => {
     scrollToBottom();
   }, [messages, isLoading]);
+
+  const handleOpenSources = (sources: Message['sources']) => {
+    setSelectedSources(sources);
+    setIsSourcesModalOpen(true);
+  };
 
   return (
     <div className="space-y-4">
@@ -91,6 +99,21 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
                   {message.text}
                 </ReactMarkdown>
               </div>
+              
+              {/* 출처 버튼 */}
+              {message.sources && message.sources.length > 0 && (
+                <button
+                  onClick={() => handleOpenSources(message.sources!)}
+                  className="inline-flex items-center space-x-1.5 mt-3 px-3 py-1.5 text-xs font-medium text-ewha-green bg-ewha-green/5 hover:bg-ewha-green/10 rounded-lg transition-colors border border-ewha-green/20"
+                >
+                  <span>🔗</span>
+                  <span>출처 보기</span>
+                  <span className="text-[10px] bg-ewha-green/20 px-1.5 py-0.5 rounded">
+                    {message.sources.length}
+                  </span>
+                </button>
+              )}
+              
               <span className="text-xs mt-2 block text-gray-400">
                 {message.timestamp.toLocaleTimeString('ko-KR', {
                   hour: '2-digit',
@@ -115,6 +138,13 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
       )}
       
       <div ref={messagesEndRef} />
+
+      {/* 출처 모달 */}
+      <SourcesModal
+        isOpen={isSourcesModalOpen}
+        onClose={() => setIsSourcesModalOpen(false)}
+        sources={selectedSources}
+      />
     </div>
   );
 }

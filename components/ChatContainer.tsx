@@ -10,11 +10,20 @@ import GradeGuideSection from './GradeGuideSection';
 import SidebarDrawer from './SidebarDrawer';
 import FeedbackModal from './FeedbackModal';
 
+export interface Source {
+  title: string;
+  content: string;
+  url?: string;
+  category?: string;
+  relevance_score?: number | null;
+}
+
 export interface Message {
   id: string;
   text: string;
   sender: 'user' | 'bot';
   timestamp: Date;
+  sources?: Source[];
 }
 
 interface StudentInfo {
@@ -108,6 +117,7 @@ const ChatContainer = forwardRef<
         text: data.response || '죄송합니다. 답변을 생성할 수 없습니다.',
         sender: 'bot',
         timestamp: new Date(),
+        sources: data.sources || [],
       };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
