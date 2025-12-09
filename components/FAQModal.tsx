@@ -114,7 +114,7 @@ export default function FAQModal({ isOpen, onClose, onQuestionClick }: FAQModalP
         </div>
 
         {/* 질문 리스트 */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-3">
+        <div className="flex-1 overflow-y-auto p-6 space-y-3 pb-6">
           {filteredQuestions.map((item, index) => (
             <button
               key={index}
@@ -134,13 +134,6 @@ export default function FAQModal({ isOpen, onClose, onQuestionClick }: FAQModalP
               </div>
             </button>
           ))}
-        </div>
-
-        {/* 하단 정보 */}
-        <div className="p-4 border-t bg-gray-50 text-center">
-          <p className="text-xs text-gray-500">
-            📊 실시간으로 학생들이 많이 물어보는 질문들이에요
-          </p>
         </div>
       </div>
     </div>

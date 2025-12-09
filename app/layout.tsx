@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "신입생 도우미 챗봇",
-  description: "신입생들을 위한 RAG 기반 AI 챗봇",
+  title: "이화여자대학교 챗봇: 버디봇",
+  description: "이화여대 신입생들을 위한 RAG 기반 챗봇 - 버디봇",
 };
 
 export default function RootLayout({

@@ -59,21 +59,21 @@ export default function ImportantAlertBanner() {
 
   if (loading) {
     return (
-      <div className="bg-gradient-to-r from-accent-coral to-accent-yellow-green text-white rounded-2xl p-6 shadow-md mb-6 animate-pulse">
-        <div className="h-6 bg-white/30 rounded w-3/4 mb-3"></div>
-        <div className="h-4 bg-white/20 rounded w-full"></div>
+      <div className="bg-gradient-to-r from-accent-coral to-accent-yellow-green text-white rounded-xl p-4 shadow-md mb-4 animate-pulse">
+        <div className="h-5 bg-white/30 rounded w-3/4 mb-2"></div>
+        <div className="h-3 bg-white/20 rounded w-full"></div>
       </div>
     );
   }
 
   if (events.length === 0) {
     return (
-      <div className="bg-gradient-to-r from-accent-blue to-accent-mint text-white rounded-2xl p-6 shadow-md mb-6">
-        <div className="flex items-center mb-3">
-          <span className="text-2xl mr-2">💡</span>
-          <h3 className="text-lg font-bold">버디의 한마디</h3>
+      <div className="bg-gradient-to-r from-accent-blue to-accent-mint text-white rounded-xl p-4 shadow-md mb-4">
+        <div className="flex items-center mb-2">
+          <span className="text-xl mr-2">💡</span>
+          <h3 className="text-sm font-bold">버디의 한마디</h3>
         </div>
-        <p className="text-sm leading-relaxed">
+        <p className="text-xs leading-relaxed">
           현재 다가오는 중요 일정이 없어요.<br />
           편안한 학기를 보내고 있네요! 😊
         </p>
@@ -82,16 +82,16 @@ export default function ImportantAlertBanner() {
   }
 
   return (
-    <div className="bg-gradient-to-r from-accent-coral to-accent-yellow-green text-white rounded-2xl p-6 shadow-md mb-6">
-      <div className="flex items-center mb-3">
-        <span className="text-2xl mr-2">🔥</span>
-        <h3 className="text-lg font-bold">지금 꼭 확인해야 할 것들!</h3>
+    <div className="bg-gradient-to-r from-accent-coral to-accent-yellow-green text-white rounded-xl p-4 shadow-md mb-4">
+      <div className="flex items-center mb-2">
+        <span className="text-xl mr-2">🔥</span>
+        <h3 className="text-base font-bold">지금 꼭 확인해야 할 중요 일정들!</h3>
       </div>
       
       <div className="space-y-2">
         {events.map((event, index) => (
-          <div key={index} className="bg-white/20 rounded-lg p-3">
-            <div className="text-xs font-semibold mb-1">
+          <div key={index} className="bg-white/20 rounded-lg p-2.5">
+            <div className="text-xs font-semibold mb-0.5">
               📅 {new Date(event.startDate).toLocaleDateString('ko-KR', { 
                 month: 'long', 
                 day: 'numeric' 

@@ -4,6 +4,10 @@ import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 're
 import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
+import HeroSection from './HeroSection';
+import StudentInfoCard from './StudentInfoCard';
+import ImportantAlertBanner from './ImportantAlertBanner';
+import GradeGuideSection from './GradeGuideSection';
 
 export interface Message {
   id: string;
@@ -19,23 +23,40 @@ interface StudentInfo {
 }
 
 interface ChatContainerProps {
-  studentInfo: StudentInfo;
   onOpenFAQ: () => void;
 }
 
 const ChatContainer = forwardRef<
   { sendMessageFromParent: (msg: string) => void },
   ChatContainerProps
->(({ studentInfo, onOpenFAQ }, ref) => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      text: '안녕하세요! 신입생 도우미 챗봇입니다. 궁금한 점을 물어보세요! 😊',
-      sender: 'bot',
-      timestamp: new Date(),
-    },
-  ]);
+>(({ onOpenFAQ }, ref) => {
+  const [studentInfo, setStudentInfo] = useState<StudentInfo | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  // 컴포넌트 마운트 시 localStorage에서 학생 정보 불러오기
+  useEffect(() => {
+    const savedInfo = localStorage.getItem('studentInfo');
+    if (savedInfo) {
+      try {
+        setStudentInfo(JSON.parse(savedInfo));
+      } catch (error) {
+        console.error('학생 정보 불러오기 실패:', error);
+      }
+    }
+  }, []);
+
+  const handleInfoComplete = (info: StudentInfo) => {
+    setStudentInfo(info);
+  };
+
+  const handleInfoReset = () => {
+    setStudentInfo(null);
+  };
+
+  const handleGuideClick = (query: string) => {
+    sendMessage(query);
+  };
 
   // 부모 컴포넌트에서 메시지 전송 가능하도록
   useImperativeHandle(ref, () => ({
@@ -99,11 +120,40 @@ const ChatContainer = forwardRef<
 
   return (
     <div className="flex flex-col h-full">
-      <ChatHeader />
-      <ChatMessages messages={messages} isLoading={isLoading} />
+      <ChatHeader onOpenFAQ={onOpenFAQ} />
+      <div className="flex-1 overflow-y-auto bg-bg-cream">
+        {/* 고정 레이아웃 - 모든 섹션이 항상 표시됨 */}
+        <div className="p-4 space-y-4">
+          <HeroSection />
+          <StudentInfoCard 
+            onInfoComplete={handleInfoComplete}
+            onInfoReset={handleInfoReset}
+            studentInfo={studentInfo}
+          />
+          <ImportantAlertBanner />
+          <GradeGuideSection 
+            onGuideClick={handleGuideClick}
+            studentInfo={studentInfo}
+          />
+        </div>
+        
+        {/* 채팅 메시지 영역 */}
+        {messages.length > 0 && (
+          <div className="px-4 pb-4">
+            <div className="border-t-2 border-gray-300 pt-4 mb-2">
+              <div className="flex items-center justify-center mb-3">
+                <span className="bg-ewha-green text-white text-xs px-3 py-1 rounded-full font-medium">
+                  💬 채팅 시작
+                </span>
+              </div>
+              <ChatMessages messages={messages} isLoading={isLoading} />
+            </div>
+          </div>
+        )}
+      </div>
       <ChatInput 
         onSendMessage={sendMessage} 
-        disabled={isLoading}
+        disabled={isLoading || !studentInfo}
         onOpenFAQ={onOpenFAQ}
       />
     </div>
