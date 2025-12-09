@@ -8,6 +8,8 @@ import HeroSection from './HeroSection';
 import StudentInfoCard from './StudentInfoCard';
 import ImportantAlertBanner from './ImportantAlertBanner';
 import GradeGuideSection from './GradeGuideSection';
+import SidebarDrawer from './SidebarDrawer';
+import FeedbackModal from './FeedbackModal';
 
 export interface Message {
   id: string;
@@ -33,6 +35,8 @@ const ChatContainer = forwardRef<
   const [studentInfo, setStudentInfo] = useState<StudentInfo | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   // 컴포넌트 마운트 시 localStorage에서 학생 정보 불러오기
   useEffect(() => {
@@ -56,6 +60,10 @@ const ChatContainer = forwardRef<
 
   const handleGuideClick = (query: string) => {
     sendMessage(query);
+  };
+
+  const handleClearChat = () => {
+    setMessages([]);
   };
 
   // 부모 컴포넌트에서 메시지 전송 가능하도록
@@ -119,8 +127,21 @@ const ChatContainer = forwardRef<
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <ChatHeader onOpenFAQ={onOpenFAQ} />
+    <div className="flex flex-col h-full relative">
+      <ChatHeader 
+        onOpenFAQ={onOpenFAQ}
+        onOpenDrawer={() => setIsDrawerOpen(true)}
+      />
+      <SidebarDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        onClearChat={handleClearChat}
+        onOpenFeedback={() => setIsFeedbackOpen(true)}
+      />
+      <FeedbackModal
+        isOpen={isFeedbackOpen}
+        onClose={() => setIsFeedbackOpen(false)}
+      />
       <div className="flex-1 overflow-y-auto bg-bg-cream">
         {/* 고정 레이아웃 - 모든 섹션이 항상 표시됨 */}
         <div className="p-4 space-y-4">

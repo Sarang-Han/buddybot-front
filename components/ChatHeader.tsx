@@ -1,13 +1,15 @@
 interface ChatHeaderProps {
   onOpenFAQ: () => void;
+  onOpenDrawer: () => void;
 }
 
-export default function ChatHeader({ onOpenFAQ }: ChatHeaderProps) {
+export default function ChatHeader({ onOpenFAQ, onOpenDrawer }: ChatHeaderProps) {
   return (
     <header className="bg-gradient-to-r from-ewha-green to-ewha-green-sub text-white p-4 shadow-md">
       <div className="flex items-center justify-between relative">
         {/* 왼쪽: 메뉴 버튼 */}
         <button
+          onClick={onOpenDrawer}
           className="p-2 hover:bg-white/10 rounded-lg transition-colors z-10"
           aria-label="메뉴"
         >
