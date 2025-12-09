@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
@@ -12,7 +12,21 @@ export interface Message {
   timestamp: Date;
 }
 
-export default function ChatContainer() {
+interface StudentInfo {
+  grade: string;
+  major: string;
+  semester: string;
+}
+
+interface ChatContainerProps {
+  studentInfo: StudentInfo;
+  onOpenFAQ: () => void;
+}
+
+const ChatContainer = forwardRef<
+  { sendMessageFromParent: (msg: string) => void },
+  ChatContainerProps
+>(({ studentInfo, onOpenFAQ }, ref) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -22,6 +36,13 @@ export default function ChatContainer() {
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
+
+  // 부모 컴포넌트에서 메시지 전송 가능하도록
+  useImperativeHandle(ref, () => ({
+    sendMessageFromParent: (msg: string) => {
+      sendMessage(msg);
+    },
+  }));
 
   const sendMessage = async (text: string) => {
     // 사용자 메시지 추가
@@ -35,13 +56,16 @@ export default function ChatContainer() {
     setIsLoading(true);
 
     try {
-      // TODO: FastAPI 백엔드 연동
+      // FastAPI 백엔드 연동 (학생 정보 포함)
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({ 
+          message: text,
+          studentInfo,
+        }),
       });
 
       if (!response.ok) {
@@ -77,7 +101,15 @@ export default function ChatContainer() {
     <div className="flex flex-col h-full">
       <ChatHeader />
       <ChatMessages messages={messages} isLoading={isLoading} />
-      <ChatInput onSendMessage={sendMessage} disabled={isLoading} />
+      <ChatInput 
+        onSendMessage={sendMessage} 
+        disabled={isLoading}
+        onOpenFAQ={onOpenFAQ}
+      />
     </div>
   );
-}
+});
+
+ChatContainer.displayName = 'ChatContainer';
+
+export default ChatContainer;

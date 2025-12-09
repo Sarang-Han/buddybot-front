@@ -20,7 +20,7 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
   }, [messages, isLoading]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-bg-cream">
       {messages.map((message) => (
         <div
           key={message.id}
@@ -29,14 +29,14 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
           <div
             className={`max-w-[75%] rounded-2xl px-4 py-3 ${
               message.sender === 'user'
-                ? 'bg-blue-600 text-white rounded-br-sm'
+                ? 'bg-ewha-green text-white rounded-br-sm'
                 : 'bg-white text-gray-800 shadow-md rounded-bl-sm'
             }`}
           >
             <p className="text-sm whitespace-pre-wrap break-words">{message.text}</p>
             <span
               className={`text-xs mt-1 block ${
-                message.sender === 'user' ? 'text-blue-100' : 'text-gray-400'
+                message.sender === 'user' ? 'text-green-100' : 'text-gray-400'
               }`}
             >
               {message.timestamp.toLocaleTimeString('ko-KR', {
