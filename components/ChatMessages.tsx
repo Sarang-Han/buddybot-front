@@ -180,7 +180,7 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
       <SourcesModal
         isOpen={isSourcesModalOpen}
         onClose={() => setIsSourcesModalOpen(false)}
-        sources={selectedSources}
+        sources={selectedSources || []}
       />
     </div>
   );
