@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import Image from 'next/image';
 import { Message } from './ChatContainer';
 import SourcesModal from './SourcesModal';
 
@@ -51,7 +52,23 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
               </span>
             </div>
           ) : (
-            <div className="w-full px-4 py-3 transition-all duration-200">
+            <div className="w-full pr-4 py-3 transition-all duration-200">
+              <div className="flex items-start gap-4">
+                {/* 프로필 이미지 */}
+                <div className="flex-shrink-0">
+                  <div className="w-7 h-7 rounded-full overflow-hidden ring-1 ring-ewha-green/30 shadow-sm">
+                    <Image
+                      src="/bear.jpeg"
+                      alt="BuddyBot"
+                      width={36}
+                      height={36}
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+                </div>
+                
+                {/* 메시지 내용 */}
+                <div className="flex-1 min-w-0">
               <div className="text-sm text-gray-800 prose prose-sm max-w-none
                 prose-p:text-gray-800 prose-p:my-2 prose-p:leading-relaxed
                 prose-strong:text-gray-900 prose-strong:font-semibold
@@ -120,6 +137,8 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
                   minute: '2-digit',
                 })}
               </span>
+                </div>
+              </div>
             </div>
           )}
         </div>
@@ -127,11 +146,29 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
       
       {isLoading && (
         <div className="w-full animate-fade-in">
-          <div className="px-4 py-3">
-            <div className="flex space-x-2">
-              <div className="w-2 h-2 bg-gradient-to-r from-ewha-green to-accent-mint rounded-full animate-bounce"></div>
-              <div className="w-2 h-2 bg-gradient-to-r from-accent-mint to-accent-blue rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-              <div className="w-2 h-2 bg-gradient-to-r from-accent-blue to-ewha-green rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+          <div className="pr-4 py-3">
+            <div className="flex items-start gap-1.5">
+              {/* 로딩 시 프로필 이미지 */}
+              <div className="flex-shrink-0">
+                <div className="w-7 h-7 rounded-full overflow-hidden ring-1 ring-ewha-green/30 shadow-sm">
+                  <Image
+                    src="/bear.jpeg"
+                    alt="BuddyBot"
+                    width={36}
+                    height={36}
+                    className="w-full h-full rounded-full object-cover"
+                  />
+                </div>
+              </div>
+              
+              {/* 개선된 로딩 인디케이터 */}
+              <div className="flex items-center gap-1 py-2">
+                <div className="typing-indicator">
+                  <span className="typing-dot"></span>
+                  <span className="typing-dot"></span>
+                  <span className="typing-dot"></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
